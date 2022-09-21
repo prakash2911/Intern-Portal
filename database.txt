@@ -1,0 +1,48 @@
+CREATE SCHEMA `intern_portal` ;
+
+CREATE TABLE `intern_portal`.`account` (
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NULL,
+  `usertype` VARCHAR(45) NULL,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  PRIMARY KEY (`email`));
+
+CREATE TABLE `intern_portal`.`course` (
+  `name` VARCHAR(45) NOT NULL,
+  `duration` INT NOT NULL,
+  `courseId` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `coursecol` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`courseId`));
+
+ALTER TABLE `intern_portal`.`course` 
+DROP COLUMN `coursecol`,
+DROP COLUMN `status`;
+
+CREATE TABLE `intern_portal`.`intern_course` (
+  `empId` VARCHAR(45) NOT NULL,
+  `couseId` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`empId`, `couseId`));
+
+CREATE TABLE `intern_portal`.`feedback` (
+  `feedbackId` VARCHAR(45) NOT NULL,
+  `senderId` VARCHAR(45) NOT NULL,
+  `reciverId` VARCHAR(45) NULL,
+  `comment` VARCHAR(10000) NULL,
+  PRIMARY KEY (`feedbackId`));
+  ALTER TABLE `intern_portal`.`feedback` 
+CHANGE COLUMN `feedbackId` `feedbackId` INT NOT NULL ;
+
+CREATE TABLE `intern_portal`.`projects` (
+  `InternId` VARCHAR(45) NOT NULL,
+  `ManagerId` VARCHAR(45) NOT NULL,
+  `ProjectId` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NULL,
+  PRIMARY KEY (`ManagerId`, `InternId`, `ProjectId`));
+
+CREATE TABLE `intern_portal`.`intern_manager` (
+  `internid` VARCHAR(45) NOT NULL,
+  `managerid` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`internid`, `managerid`));
+
